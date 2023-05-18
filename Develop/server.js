@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const notes = require('./public/assets/db/db.json');
 const fs = require('fs');
+const notes = require('./public/assets/db/db.json');
+const uuid = require('./public/assets/js/uuid');
 // const index = require('./public/assets/js/index.js');
 
 const PORT = 5500;
@@ -21,7 +22,6 @@ app.get('/notes', (req, res) => {
 });
 
 app.get('/api/notes', (req, res) => {
-    console.info('GET /api/notes');
     console.log(notes);
     res.json(notes);
 });
@@ -30,6 +30,7 @@ app.post('/api/notes', (req, res) => {
     const { title, text } = req.body;
     if(req.body) {
         const newNote = {
+            id: uuid(),
             title,
             text,
         };
@@ -48,7 +49,7 @@ app.post('/api/notes', (req, res) => {
             }
         });
     }
-})
+});
 
 
 app.listen(PORT, () => {
