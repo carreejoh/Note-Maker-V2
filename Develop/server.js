@@ -22,8 +22,8 @@ app.get('/notes', (req, res) => {
 });
 
 app.get('/api/notes', (req, res) => {
-    console.log(notes);
     res.json(notes);
+    console.log("I'm reached yaya");
 });
 
 app.post('/api/notes', (req, res) => {
@@ -44,7 +44,7 @@ app.post('/api/notes', (req, res) => {
                 const parsedNotes = JSON.parse(data);
                 parsedNotes.push(newNote);
 
-                fs.writeFile('./public/assets/db/db.json', JSON.stringify(parsedNotes, null, 4), 
+                fs.writeFile('./public/assets/db/db.json', JSON.stringify(parsedNotes, null, 1), 
                 (writeErr) => writeErr ? console.error(writeErr) : console.info("successfully added note"));
             }
         });
